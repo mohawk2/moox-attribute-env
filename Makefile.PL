@@ -37,8 +37,18 @@ WriteMakefile(
         requires => {
           'Test::Pod::Coverage' => '1.08',
           'Test::Pod' => '1.22',
+          'Pod::Markdown' => 0,
         },
       },
     },
   },
 );
+
+sub MY::postamble {
+  <<EOF;
+pure_all :: README.md
+
+README.md : \$(VERSION_FROM)
+\tpod2markdown \$< >\$\@
+EOF
+}
