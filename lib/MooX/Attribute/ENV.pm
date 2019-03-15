@@ -52,6 +52,18 @@ sub _generate_key {
 
 MooX::Attribute::ENV - Allow Moo attributes to get their values from %ENV
 
+=begin markdown
+
+# PROJECT STATUS
+
+| OS      |  Build status |
+|:-------:|--------------:|
+| Linux   | [![Build Status](https://travis-ci.org/mohawk2/moox-attribute-env.svg?branch=master)](https://travis-ci.org/mohawk2/moox-attribute-env) |
+
+[![CPAN version](https://badge.fury.io/pl/moox-attribute-env.svg)](https://metacpan.org/pod/MooX::Attribute::ENV) [![Coverage Status](https://coveralls.io/repos/github/mohawk2/moox-attribute-env/badge.svg?branch=master)](https://coveralls.io/github/mohawk2/moox-attribute-env?branch=master)
+
+=end markdown
+
 =head1 SYNOPSIS
 
   package MyMod;
