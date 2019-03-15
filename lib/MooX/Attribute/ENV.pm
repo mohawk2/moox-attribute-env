@@ -123,9 +123,9 @@ MooX::Attribute::ENV - Allow Moo attributes to get their values from %ENV
 =head1 DESCRIPTION
 
 This is a L<Moo> extension. It allows other attributes for L<Moo/has>. If
-any of these are given, then instead of the normal value-setting "chain"
-for attributes of given, default; the chain will be given, environment,
-default.
+any of these are given, then L<Moo/BUILDARGS> is wrapped so that values
+for object attributes can, if not supplied in the normal construction
+process, come from the environment.
 
 The environment will be searched for either the given case, or upper case,
 version of the names discussed below.
