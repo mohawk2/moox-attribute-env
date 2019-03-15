@@ -67,7 +67,7 @@ sub _generate_key {
     $target =~ s/:+/_/g;
     return "${target}_$attr";
   }
-  undef;
+  undef; # uncoverable statement
 }
 
 =head1 NAME
