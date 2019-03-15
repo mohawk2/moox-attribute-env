@@ -18,22 +18,44 @@ sub _override_function {
 }
 # end MooX::Utils;
 
+my %target2attr2envkey;
 sub import {
   my $target = scalar caller;
   _override_function($target, 'has', sub {
     my ($orig, $namespec, %opts) = @_;
-    my $old_default = $opts{default};
+    my ($other_opts, $env_opts) = _partition_opts(\%opts);
+    $orig->($namespec, %$other_opts);
+    return if !keys %$env_opts; # non env
     for my $name (ref $namespec ? @$namespec : $namespec) {
       my $envkey = _generate_key($name, \%opts, $target);
-      $orig->($namespec, %opts), return if !defined $envkey; # non env
-      $orig->($name, %opts, default => sub {
-        return $ENV{$envkey} if defined $ENV{$envkey};
-        return $ENV{uc $envkey} if defined $ENV{uc $envkey};
-        return $old_default->() if ref $old_default eq 'CODE';
-        $old_default;
-      });
+      $target2attr2envkey{$target}{$name} = $envkey;
     }
   });
+  _override_function($target, 'BUILDARGS', sub {
+    my ($orig, $class, @args) = @_;
+    my %args = @args == 1 && ref($args[0]) eq 'HASH' ? %{$args[0]} : @args;
+    for my $attr (keys %{ $target2attr2envkey{$target} }) {
+      next if exists $args{$attr};
+      my $value = _lookup_env($target2attr2envkey{$target}{$attr});
+      $args{$attr} = $value if defined $value;
+    }
+    return $class->$orig(\%args);
+  });
+}
+
+sub _lookup_env {
+  my ($envkey) = @_;
+  return $ENV{$envkey} if exists $ENV{$envkey};
+  return $ENV{uc $envkey} if exists $ENV{uc $envkey};
+  undef;
+}
+
+my @KEYS = qw(env env_key env_prefix env_package_prefix);
+sub _partition_opts {
+  my ($opts) = @_;
+  my (%opts, %env_opts) = %$opts;
+  $env_opts{$_} = delete $opts{$_} for grep defined $opts{$_}, @KEYS;
+  (\%opts, \%env_opts);
 }
 
 sub _generate_key {

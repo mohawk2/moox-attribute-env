@@ -7,6 +7,7 @@ use MooX::Attribute::ENV;
 has attr => (
   is => 'ro',
   env_key => 'attr_val',
+  predicate => 1,
 );
 # looks for $ENV{otherattr} and $ENV{OTHERATTR}, then any default
 has otherattr => (
@@ -37,7 +38,7 @@ sub test_with_env {
   local %ENV = (%ENV, %$env);
   my $obj = MyMod->new;
   local $Test::Builder::Level = $Test::Builder::Level + 1;
-  is $obj->$attr, $expected, "$attr from ENV";
+  is $obj->$attr, $expected, "$attr from ENV(@{[ keys %$env ]})";
 }
 
 test_with_env(attr => { ATTR_VAL => 3 }, 3);
@@ -56,5 +57,8 @@ test_with_env(prefixattr => { xxx_prefixattr => 5 }, 5);
 
 test_with_env(packageattr => { MYMOD_PACKAGEATTR => 6 }, 6);
 test_with_env(packageattr => { MyMod_packageattr => 6 }, 6);
+
+my $obj = MyMod->new;
+is $obj->has_attr, !1, 'if no env set or value given, predicate false';
 
 done_testing;
