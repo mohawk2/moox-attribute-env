@@ -29,6 +29,9 @@ WriteMakefile(
         url => 'git@github.com:mohawk2/moox-attribute-env.git',
         web => 'https://github.com/mohawk2/moox-attribute-env',
       },
+      bugtracker  => {
+        web => 'https://github.com/mohawk2/moox-attribute-env/issues',
+      },
       license => [ 'http://dev.perl.org/licenses/' ],
     },
     prereqs => {
