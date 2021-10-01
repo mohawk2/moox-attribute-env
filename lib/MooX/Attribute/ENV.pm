@@ -44,9 +44,11 @@ sub import {
 }
 
 sub _lookup_env {
-  my ($envkey) = @_;
-  return $ENV{$envkey} if exists $ENV{$envkey};
-  return $ENV{uc $envkey} if exists $ENV{uc $envkey};
+  my @env_keys = ref $_[0] eq 'ARRAY' ? @{ $_[0] } : $_[0];
+  foreach my $envkey ( @env_keys ) {
+      return $ENV{$envkey} if exists $ENV{$envkey};
+      return $ENV{uc $envkey} if exists $ENV{uc $envkey};
+  }
   undef;
 }
 
