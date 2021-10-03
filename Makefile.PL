@@ -47,7 +47,7 @@ WriteMakefile(
 );
 
 sub MY::postamble {
-  <<EOF;
+  -d '.git' ? <<EOF : '';
 pure_all :: README.md
 
 README.md : \$(VERSION_FROM)
