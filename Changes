@@ -1,3 +1,5 @@
+- add ability to search multiple keys - thanks @vanHoesel
+
 0.02 2019-03-15
  - partition out ENV-related attribute keys so Moose not blow up
 

@@ -98,7 +98,7 @@ MooX::Attribute::ENV - Allow Moo attributes to get their values from %ENV
     is => 'ro',
     env_key => 'attr_val',
   );
-  # look for $ENV{attr_val} and $ENV{next_VAL}, in that order
+  # look for $ENV{attr_val} and $ENV{next_val}, in that order
   has some => (
     is => 'ro',
     env_key => [ 'attr_val', 'next_val' ],
