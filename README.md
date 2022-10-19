@@ -8,7 +8,7 @@ MooX::Attribute::ENV - Allow Moo attributes to get their values from %ENV
 |:-------:|--------------:|
 | Linux   | [![Build Status](https://travis-ci.org/mohawk2/moox-attribute-env.svg?branch=master)](https://travis-ci.org/mohawk2/moox-attribute-env) |
 
-[![CPAN version](https://badge.fury.io/pl/moox-attribute-env.svg)](https://metacpan.org/pod/MooX::Attribute::ENV) [![Coverage Status](https://coveralls.io/repos/github/mohawk2/moox-attribute-env/badge.svg?branch=master)](https://coveralls.io/github/mohawk2/moox-attribute-env?branch=master)
+[![CPAN version](https://badge.fury.io/pl/MooX-Attribute-ENV.svg)](https://metacpan.org/pod/MooX::Attribute::ENV) [![Coverage Status](https://coveralls.io/repos/github/mohawk2/moox-attribute-env/badge.svg?branch=master)](https://coveralls.io/github/mohawk2/moox-attribute-env?branch=master)
 
 # SYNOPSIS
 
